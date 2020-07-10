@@ -102,3 +102,34 @@ dist
 
 # TernJS port file
 .tern-port
+
+# calculator-app specific
+# files to ignore
+*.run
+*.pyc
+Passed_*.mp4
+Failed_*.mp4
+Recording_*.mp4
+Passed_*.png
+Failed_*.png
+Step_*.png
+npm-debug.log
+hs_err_pid*.log
+sikulixapi*.jar
+package-lock.json
+.project
+nohup.out
+
+# dirs to ignore
+.screenshots/
+videos/
+node_modules/
+e2e-report/
+logs/
+tmp/
+.tmp/
+.DS_Store
+.vscode/
+.settings/
+.pytest_cache/
+__pycache__/
