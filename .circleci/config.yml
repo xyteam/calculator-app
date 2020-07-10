@@ -1,0 +1,22 @@
+jobs:
+  build:
+    docker:
+      - image: 'xyteam/autobdd-run:2.1.0'
+    working_directory: ~/Projects/AutoBDD/test-projects/test-calculator
+    environment:
+      BASH_ENV: ".circleci/bash_env.sh"    
+    steps:
+      - checkout
+      - run: jest --verbose js-code
+      - run: python -m pytest -r A py-code
+      - run: cd cal-app && node --version && npm install && npm start && cypress run && npm stop
+      - run: cd e2e-test/test-something && xvfb-runner.sh npx wdio abdd.js
+
+orbs:
+  node: circleci/node@3.0.1
+
+workflows:
+  version: 2
+  build-and-test:
+    jobs:
+      - build
