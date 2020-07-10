@@ -7,10 +7,10 @@ jobs:
       BASH_ENV: ".circleci/bash_env.sh"    
     steps:
       - checkout
-      - run: jest --verbose js-code
-      - run: python -m pytest -r A py-code
-      - run: cd cal-app && node --version && npm install && npm start && cypress run && npm stop
-      - run: cd e2e-test/test-something && xvfb-runner.sh npx wdio abdd.js
+      - run: make js-test
+      - run: make py-test
+      - run: make int-test
+      - run: make e2e-test
 
 orbs:
   node: circleci/node@3.0.1

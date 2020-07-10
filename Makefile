@@ -18,7 +18,7 @@ js-test: prelude
 py-test: prelude
 	python -m pytest ${PWD}/py-code
 
-cy-test: prelude start
+cy-test: prelude
 	cd cal-app && cypress run ./cypress
 
 e2e-test: prelude start
@@ -26,7 +26,7 @@ e2e-test: prelude start
 
 unit-test: js-test py-test
 
-int-test: cy-test
+int-test: install start cy-test stop
 
 test: unit-test
 
