@@ -1,10 +1,21 @@
+orbs:
+  node: circleci/node@3.0.1
+
 jobs:
   build:
     docker:
       - image: 'xyteam/autobdd-run:2.1.0'
     working_directory: ~/Projects/AutoBDD/test-projects/test-calculator
     environment:
-      BASH_ENV: ".circleci/bash_env.sh"    
+      BASH_ENV: ".circleci/bash_env.sh"
+    steps:
+      - checkout
+  unit-test:
+    docker:
+      - image: 'xyteam/autobdd-run:2.1.0'
+    working_directory: ~/Projects/AutoBDD/test-projects/test-calculator
+    environment:
+      BASH_ENV: ".circleci/bash_env.sh"
     steps:
       - checkout
       - run:
@@ -17,22 +28,44 @@ jobs:
           command: make py-test
       - store_test_results:
           path: test-results/py-code/
+  int-test:
+    docker:
+      - image: 'xyteam/autobdd-run:2.1.0'
+    working_directory: ~/Projects/AutoBDD/test-projects/test-calculator
+    environment:
+      BASH_ENV: ".circleci/bash_env.sh"
+    steps:
+      - checkout
       - run:
           name: int test
           command: make int-test
       - store_test_results:
           path: test-results/cal-app/
+  e2e-test:
+    docker:
+      - image: 'xyteam/autobdd-run:2.1.0'
+    working_directory: ~/Projects/AutoBDD/test-projects/test-calculator
+    environment:
+      BASH_ENV: ".circleci/bash_env.sh"
+    steps:
+      - checkout
       - run:
           name: e2e test
           command: make e2e-test
       - store_test_results:
           path: test-results/e2e-test/
-
-orbs:
-  node: circleci/node@3.0.1
-
+          
 workflows:
   version: 2
-  build-and-test:
+  build_and_test:
     jobs:
       - build
+      - unit-test:
+          requires:
+            - build    
+      - int-test:
+          requires:
+            - build    
+      - e2e-test:
+          requires:
+            - build    
