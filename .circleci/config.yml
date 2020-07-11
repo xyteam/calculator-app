@@ -5,6 +5,7 @@ jobs:
   build:
     docker:
       - image: 'xyteam/autobdd-run:2.1.0'
+    docker_layer_caching: true
     working_directory: ~/Projects/AutoBDD/test-projects/test-calculator
     environment:
       BASH_ENV: ".circleci/bash_env.sh"
@@ -13,6 +14,7 @@ jobs:
   unit-test:
     docker:
       - image: 'xyteam/autobdd-run:2.1.0'
+    docker_layer_caching: true
     working_directory: ~/Projects/AutoBDD/test-projects/test-calculator
     environment:
       BASH_ENV: ".circleci/bash_env.sh"
@@ -31,6 +33,7 @@ jobs:
   int-test:
     docker:
       - image: 'xyteam/autobdd-run:2.1.0'
+    docker_layer_caching: true
     working_directory: ~/Projects/AutoBDD/test-projects/test-calculator
     environment:
       BASH_ENV: ".circleci/bash_env.sh"
@@ -44,6 +47,7 @@ jobs:
   e2e-test:
     docker:
       - image: 'xyteam/autobdd-run:2.1.0'
+    docker_layer_caching: true
     working_directory: ~/Projects/AutoBDD/test-projects/test-calculator
     environment:
       BASH_ENV: ".circleci/bash_env.sh"
