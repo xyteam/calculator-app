@@ -13,13 +13,13 @@ stop:
 	cd cal-app && npm stop
 
 js-test: prelude
-	cd js-code && jest `pwd` --verbose --reporters=default --reporters=jest-junit
+	cd js-code && jest `pwd`
 
 py-test: prelude
-	cd py-code && python -m pytest `pwd` --junitxml=junit.xml
+	cd py-code && python -m pytest `pwd` --junitxml=../test-results/py-code/junit.xml
 
 cy-test: prelude
-	cd cal-app && cypress run ./cypress --reporter junit
+	cd cal-app && cypress run ./cypress
 
 e2e-test: prelude start
 	cd e2e-test/test-something && xvfb-runner.sh npx wdio abdd.js

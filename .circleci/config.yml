@@ -11,22 +11,22 @@ jobs:
           name: js unit test
           command: make js-test
       - store_test_results:
-          path: js-code/
+          path: test-results/js-code/
       - run:
           name: py unit test
           command: make py-test
       - store_test_results:
-          path: py-code/
+          path: test-results/py-code/
       - run:
           name: int test
           command: make int-test
       - store_test_results:
-          path: cal-app/
-      # - run:
-      #     name: e2e test
-      #     command: make e2e-test
-      # - store_test_results:
-      #     path: e2e-test/
+          path: test-results/cal-app/
+      - run:
+          name: e2e test
+          command: make e2e-test
+      - store_test_results:
+          path: test-results/e2e-test/
 
 orbs:
   node: circleci/node@3.0.1

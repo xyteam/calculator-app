@@ -9,3 +9,4 @@ if (process.env.FrameworkPath) {
     process.env.PROJECTRUNPATH = path.resolve().split(process.env.PROJECTNAME)[0] + process.env.PROJECTNAME
 }
 // define project level Env vars here
+process.env.REPORTDIR = `${process.env.PROJECTRUNPATH}/test-results/${process.env.TestDir}/${process.env.TestModule}`;
