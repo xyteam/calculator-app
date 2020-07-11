@@ -22,11 +22,11 @@ jobs:
           command: make int-test
       - store_test_results:
           path: cal-app/
-      - run:
-          name: e2e test
-          command: make e2e-test
-      - store_test_results:
-          path: e2e-test/
+      # - run:
+      #     name: e2e test
+      #     command: make e2e-test
+      # - store_test_results:
+      #     path: e2e-test/
 
 orbs:
   node: circleci/node@3.0.1
