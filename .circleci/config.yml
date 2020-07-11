@@ -8,22 +8,22 @@ jobs:
     steps:
       - checkout
       - run:
-          name: run js unit test
+          name: js unit test
           command: make js-test
       - store_test_results:
           path: js-code/
       - run:
-          name: run py unit test
+          name: py unit test
           command: make py-test
       - store_test_results:
           path: py-code/
       - run:
-          name: run integration test
+          name: int test
           command: make int-test
       - store_test_results:
           path: cal-app/
       - run:
-          name: run integration test
+          name: e2e test
           command: make e2e-test
       - store_test_results:
           path: e2e-test/
