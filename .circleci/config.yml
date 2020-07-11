@@ -11,6 +11,8 @@ jobs:
       - run: make py-test
       - run: make int-test
       - run: make e2e-test
+    store_test_results:
+      path: test-results
 
 orbs:
   node: circleci/node@3.0.1
