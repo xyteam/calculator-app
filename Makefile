@@ -21,12 +21,14 @@ py-test: prelude
 cy-test: prelude
 	cd cal-app && cypress run ./cypress
 
-e2e-test: prelude start
+test-something: prelude
 	cd e2e-test/test-something && xvfb-runner.sh npx wdio abdd.js
 
 unit-test: js-test py-test
 
 int-test: install start cy-test stop
+
+e2e-test: install start test-something stop
 
 test: unit-test
 
