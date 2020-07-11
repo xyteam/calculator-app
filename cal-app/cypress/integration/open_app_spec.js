@@ -1,4 +1,4 @@
-describe('The Calculate', () => {
+describe('The Calculator', () => {
     it('successfully loads', () => {
         cy.visit('/');
     })
