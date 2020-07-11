@@ -7,12 +7,26 @@ jobs:
       BASH_ENV: ".circleci/bash_env.sh"    
     steps:
       - checkout
-      - run: make js-test
-      - run: make py-test
-      - run: make int-test
-      - run: make e2e-test
-    store_test_results:
-      path: test-results
+      - run:
+          name: run js unit test
+          command: make js-test
+      - store_test_results:
+          path: js-code/
+      - run:
+          name: run py unit test
+          command: make py-test
+      - store_test_results:
+          path: py-code/
+      - run:
+          name: run integration test
+          command: make int-test
+      - store_test_results:
+          path: cal-app/
+      - run:
+          name: run integration test
+          command: make e2e-test
+      - store_test_results:
+          path: e2e-test/
 
 orbs:
   node: circleci/node@3.0.1
