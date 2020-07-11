@@ -119,6 +119,8 @@ sikulixapi*.jar
 package-lock.json
 .project
 nohup.out
+junit.xml
+test-results.xml
 
 # dirs to ignore
 .screenshots/
