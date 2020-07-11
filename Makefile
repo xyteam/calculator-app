@@ -1,5 +1,8 @@
 SHELL := /bin/bash
 
+clean:
+	rm -rf test-results/*
+
 prelude:
 	cd ~/Projects/AutoBDD && . .autoPathrc.sh
 
@@ -22,7 +25,9 @@ cy-test: prelude
 	cd cal-app && cypress run ./cypress
 
 test-something: prelude
-	cd e2e-test/test-something && xvfb-runner.sh npx wdio abdd.js
+	cd e2e-test/$@ && xvfb-runner.sh npx wdio abdd.js
+	cd test-results/e2e-test && \
+		for fn in $@/*.json; do cat $${fn} | cucumber-junit --strict > $${fn}_junit.xml; done
 
 unit-test: js-test py-test
 
@@ -32,4 +37,4 @@ e2e-test: install start test-something stop
 
 test: unit-test
 
-test-all: unit-test int-test e2e-test
+test-all: clean unit-test int-test e2e-test
