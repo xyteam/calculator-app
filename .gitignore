@@ -127,6 +127,8 @@ test-results.xml
 videos/
 node_modules/
 test-results/
+allure-reports/
+allure-results/
 logs/
 tmp/
 .tmp/
