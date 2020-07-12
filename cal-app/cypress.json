@@ -4,5 +4,9 @@
     "reporter": "junit",
     "reporterOptions": {
       "mochaFile": "../test-results/cal-app/junit.xml"
+    },
+    "env": {
+      "allure": true,
+      "allureResultsPath": "allure-results"
     }
 }
