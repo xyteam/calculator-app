@@ -11,6 +11,4 @@ before_install:
 script:
     - |
         cd .docker
-        pwd
-        ls -al
-        # docker-compose run --rm calculator-app-run "make test" 
+        docker-compose run --rm calculator-app-run "make test" 
