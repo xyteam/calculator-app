@@ -19,7 +19,7 @@ js-test: prelude
 	cd js-code && jest `pwd`
 
 py-test: prelude
-	cd py-code && python -m pytest `pwd` --junitxml=../test-results/py-code/junit.xml --alluredir=allure-results
+	cd py-code && python -m pytest -r A `pwd` --junitxml=../test-results/py-code/junit.xml --alluredir=allure-results
 
 cy-test: prelude
 	cd cal-app && cypress run ./cypress
