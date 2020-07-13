@@ -1,0 +1,11 @@
+plugins:
+    - junit-xml-plugin
+    - behaviors-plugin
+    # - packages-plugin
+    # - jira-plugin
+    # - xunit-xml-plugin
+    # - trx-plugin
+    # - screen-diff-plugin
+    # - xctest-plugin
+    # - xray-plugin
+  
