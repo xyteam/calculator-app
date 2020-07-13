@@ -32,7 +32,11 @@ jobs:
       - store_test_results:
           path: test-results/js-code/
       - store_artifacts:
-          path: test-results/js-code  
+          path: test-results/js-code
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - .test-results/js-code
       - run:
           name: py unit test
           command: make py-test
@@ -40,6 +44,10 @@ jobs:
           path: test-results/py-code
       - store_artifacts:
           path: test-results/py-code
+      - persist_to_workspace:
+            root: ./
+            paths:
+              - .test-results/py-code
   int-test:
     docker:
       - image: 'xyteam/autobdd-run:2.1.0'
@@ -57,6 +65,10 @@ jobs:
           path: test-results/cal-app
       - store_artifacts:
           path: test-results/cal-app  
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - .test-results/cal-app
   e2e-test:
     docker:
       - image: 'xyteam/autobdd-run:2.1.0'
@@ -74,7 +86,39 @@ jobs:
           path: test-results/e2e-test
       - store_artifacts:
           path: test-results/e2e-test
-         
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - .test-results/e2e-test
+  allure-report:  
+    docker:
+      - image: 'xyteam/autobdd-run:2.1.0'
+    docker_layer_caching: true
+    working_directory: ~/Projects/AutoBDD/test-projects/test-calculator
+    environment:
+      BASH_ENV: ".circleci/bash_env.sh"
+    steps:
+      - attach_workspace:
+          at: ./test-results/js-code
+          at: ./test-results/py-code
+          at: ./test-results/cal-app
+          at: ./test-results/e2e-test
+      - run:
+          name: generate allure report
+          command: |
+            allure generate \
+              --config .allure/allure.yml \
+              --report-dir test-results/unit-test-report \
+              test-results/js-code test-results/py-code test-results/cal-app
+          command: |
+            allure generate \
+              --config .allure/allure.yml \
+              --report-dir test-results/e2e-test-report \
+              test-results/e2e-test
+      - store_artifacts:
+          path: test-results
+          destination: test-results
+
 workflows:
   version: 2
   build_and_test:
@@ -89,3 +133,8 @@ workflows:
       - e2e-test:
           requires:
             - build
+      - allure-report:
+          requires:
+            - unit-test
+            - int-test
+            - e2e-test
