@@ -16,7 +16,7 @@ jobs:
           root: ./
           paths:
             - ./
-  unit-test:
+  js-test:
     docker:
       - image: 'xyteam/autobdd-run:2.1.0'
     docker_layer_caching: true
@@ -26,6 +26,7 @@ jobs:
     steps:
       - attach_workspace:
           at: ./
+      - checkout
       - run:
           name: js unit test
           command: make js-test
@@ -37,6 +38,17 @@ jobs:
           root: ./
           paths:
             - ./test-results/js-code
+  py-test:
+    docker:
+      - image: 'xyteam/autobdd-run:2.1.0'
+    docker_layer_caching: true
+    working_directory: ~/Projects/AutoBDD/test-projects/test-calculator
+    environment:
+      BASH_ENV: ".circleci/bash_env.sh"
+    steps:
+      - attach_workspace:
+          at: ./
+      - checkout
       - run:
           name: py unit test
           command: make py-test
@@ -45,9 +57,9 @@ jobs:
       - store_artifacts:
           path: test-results/py-code
       - persist_to_workspace:
-            root: ./
-            paths:
-              - ./test-results/py-code
+          root: ./
+          paths:
+            - ./test-results/py-code
   int-test:
     docker:
       - image: 'xyteam/autobdd-run:2.1.0'
@@ -58,6 +70,7 @@ jobs:
     steps:
       - attach_workspace:
           at: ./
+      - checkout
       - run:
           name: int test
           command: make int-test
@@ -79,6 +92,7 @@ jobs:
     steps:
       - attach_workspace:
           at: ./
+      - checkout
       - run:
           name: e2e test
           command: make e2e-test
@@ -110,20 +124,31 @@ jobs:
 
 workflows:
   version: 2
-  build_and_test:
+  build_and_unit-test:
     jobs:
       - build
-      - unit-test:
+      - js-test:
           requires:
-            - build    
+            - build
+      - py-test:
+          requires:
+            - build
+  int-test:
+    jobs:
       - int-test:
           requires:
-            - build    
+            - build
+            - js-test
+            - py-test
       - e2e-test:
           requires:
             - build
+            - js-test
+            - py-test
+  build-artifact:
       - collect-results:
           requires:
-            - unit-test
+            - js-test
+            - py-test
             - int-test
             - e2e-test
