@@ -124,7 +124,7 @@ jobs:
 
 workflows:
   version: 2
-  build_and_unit-test:
+  build-test-artifact:
     jobs:
       - build
       - js-test:
@@ -133,10 +133,13 @@ workflows:
       - py-test:
           requires:
             - build
-  int-test:
-    jobs:
-      - int-test
-      - e2e-test
-  build-artifact:
-    jobs:
-      - collect-results
+      - int-test:
+          requires:
+            - js-test
+            - py-test
+      - e2e-test:
+          requires:
+            - int-test
+      - collect-results:
+          requires:
+            - e2e-test
