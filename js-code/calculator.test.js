@@ -13,7 +13,7 @@ describe('calculator basic ops', function () {
         expect(cal.multiply(3, 7)).toBe(21);
     });  
 
-    test('divide 21 * 7 to equal 3)', () => {
+    test('divide 21 / 7 to equal 3)', () => {
         expect(cal.divide(21, 7)).toBe(3);
     });
 
