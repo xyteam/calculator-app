@@ -1,3 +1,5 @@
 os: linux
 dist: focal
 language: node_js
+
+cd .docker && docker-compose run --rm calculator-app-run "make test" 
