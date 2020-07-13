@@ -11,5 +11,9 @@ before_install:
 
 script:
     - |
-        cd xyteam/calculator-app/.docker
-        docker-compose run --rm calculator-app-run "make test" 
+        pwd
+        ls -al
+        whoami
+        env
+        # cd xyteam/calculator-app/.docker
+        # docker-compose run --rm calculator-app-run "make test" 
