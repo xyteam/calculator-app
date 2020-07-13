@@ -10,4 +10,7 @@ before_install:
     
 script:
     - |
-        cd .docker && source .env && docker-compose run --rm calculator-app-run "make test" 
+        cd .docker
+        pwd
+        ls -al
+        # docker-compose run --rm calculator-app-run "make test" 
