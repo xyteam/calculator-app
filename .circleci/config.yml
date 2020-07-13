@@ -90,7 +90,7 @@ jobs:
           root: ./
           paths:
             - ./test-results/e2e-test
-  allure-report:  
+  collect-results:  
     docker:
       - image: 'xyteam/autobdd-run:2.1.0'
     docker_layer_caching: true
@@ -100,27 +100,27 @@ jobs:
     steps:
       - attach_workspace:
           at: ./
-      - run:
-          name: generate unit-test report
-          command: |
-            allure generate \
-              --config .allure/allure.yml \
-              --report-dir test-results/unit-test-report \
-              test-results/js-code test-results/py-code test-results/cal-app
-      - run:
-          name: generate e2e-test report
-          command: |
-            allure generate \
-              --config .allure/allure.yml \
-              --report-dir test-results/e2e-test-report \
-              test-results/e2e-test
-      - run:
-          name: tgz test-results
-          command: |
-            tar cf - ./test-results > gzip > test-results.tgz
+      # - run:
+      #     name: generate unit-test report
+      #     command: |
+      #       allure generate \
+      #         --config .allure/allure.yml \
+      #         --report-dir test-results/unit-test-report \
+      #         test-results/js-code test-results/py-code test-results/cal-app
+      # - run:
+      #     name: generate e2e-test report
+      #     command: |
+      #       allure generate \
+      #         --config .allure/allure.yml \
+      #         --report-dir test-results/e2e-test-report \
+      #         test-results/e2e-test
+      # - run:
+      #     name: tgz test-results
+      #     command: |
+      #       tar cf - ./test-results > gzip > test-results.tgz
       - store_artifacts:
-          path: test-results.tgz
-          destination: test-results.tgz
+          path: test-results
+          destination: test-results
 
 workflows:
   version: 2
@@ -136,7 +136,7 @@ workflows:
       - e2e-test:
           requires:
             - build
-      - allure-report:
+      - collect-results:
           requires:
             - unit-test
             - int-test
