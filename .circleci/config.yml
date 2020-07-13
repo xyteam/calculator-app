@@ -135,8 +135,8 @@ workflows:
             - build
   int-test:
     jobs:
-      - int-test:
-      - e2e-test:
+      - int-test
+      - e2e-test
   build-artifact:
     jobs:
-      - collect-results:
+      - collect-results
