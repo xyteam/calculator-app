@@ -6,10 +6,10 @@ services:
     - docker
   
 before_install:
-    - cd .docker
+    - cd xyteam/calculator-app/.docker
     - docker-compose pull calculator-app-run
 
 script:
     - |
-        cd .docker
+        cd xyteam/calculator-app/.docker
         docker-compose run --rm calculator-app-run "make test" 
