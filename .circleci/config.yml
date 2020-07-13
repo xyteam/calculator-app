@@ -36,7 +36,7 @@ jobs:
       - persist_to_workspace:
           root: ./
           paths:
-            - .test-results/js-code
+            - ./test-results/js-code
       - run:
           name: py unit test
           command: make py-test
@@ -47,7 +47,7 @@ jobs:
       - persist_to_workspace:
             root: ./
             paths:
-              - .test-results/py-code
+              - ./test-results/py-code
   int-test:
     docker:
       - image: 'xyteam/autobdd-run:2.1.0'
@@ -68,7 +68,7 @@ jobs:
       - persist_to_workspace:
           root: ./
           paths:
-            - .test-results/cal-app
+            - ./test-results/cal-app
   e2e-test:
     docker:
       - image: 'xyteam/autobdd-run:2.1.0'
@@ -89,7 +89,7 @@ jobs:
       - persist_to_workspace:
           root: ./
           paths:
-            - .test-results/e2e-test
+            - ./test-results/e2e-test
   allure-report:  
     docker:
       - image: 'xyteam/autobdd-run:2.1.0'
