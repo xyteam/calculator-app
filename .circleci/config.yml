@@ -146,6 +146,7 @@ workflows:
             - js-test
             - py-test
   build-artifact:
+    jobs:
       - collect-results:
           requires:
             - js-test
