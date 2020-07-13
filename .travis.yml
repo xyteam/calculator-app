@@ -5,15 +5,7 @@ language: node_js
 services:
     - docker
   
-# before_install:
-#     - cd xyteam/calculator-app/.docker
-#     - docker-compose pull calculator-app-run
-
 script:
     - |
-        pwd
-        ls -al
-        whoami
-        env
-        # cd xyteam/calculator-app/.docker
-        # docker-compose run --rm calculator-app-run "make test" 
+        cd xyteam/calculator-app/.docker
+        docker-compose run --rm calculator-app-run "make test" 
