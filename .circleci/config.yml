@@ -136,20 +136,7 @@ workflows:
   int-test:
     jobs:
       - int-test:
-          requires:
-            - build
-            - js-test
-            - py-test
       - e2e-test:
-          requires:
-            - build
-            - js-test
-            - py-test
   build-artifact:
     jobs:
       - collect-results:
-          requires:
-            - js-test
-            - py-test
-            - int-test
-            - e2e-test
