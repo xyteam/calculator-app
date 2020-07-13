@@ -5,9 +5,9 @@ language: node_js
 services:
     - docker
   
-before_install:
-    - cd xyteam/calculator-app/.docker
-    - docker-compose pull calculator-app-run
+# before_install:
+#     - cd xyteam/calculator-app/.docker
+#     - docker-compose pull calculator-app-run
 
 script:
     - |
