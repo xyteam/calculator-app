@@ -4,8 +4,11 @@ language: node_js
 
 services:
     - docker
-  
+
+before_install:
+    - docker-compose pull xyteam/calculator-app-run:2.1.0
+    
 script:
     - |
-        cd xyteam/calculator-app/.docker
+        cd .docker
         docker-compose run --rm calculator-app-run "make test" 
