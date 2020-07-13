@@ -6,7 +6,7 @@ services:
     - docker
 
 before_install:
-    - docker-compose pull xyteam/calculator-app-run:2.1.0
+    - docker-compose pull xyteam/autobdd-run:2.1.0
     
 script:
     - |
