@@ -99,7 +99,7 @@ jobs:
       BASH_ENV: ".circleci/bash_env.sh"
     steps:
       - attach_workspace:
-          at: ./test-results
+          at: ./
       - run:
           name: generate unit-test report
           command: |
