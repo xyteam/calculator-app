@@ -1,9 +1,9 @@
 {
     "baseUrl": "http://localhost:3000",
     "ignoreTestFiles": "**/examples/*.spec.js",
-    "reporter": "junit",
+    "reporter": "cypress-multi-reporters",
     "reporterOptions": {
-      "mochaFile": "../test-results/cal-app/junit.xml"
+      "configFile": "reporter-config.json"
     },
     "env": {
       "allure": true,
