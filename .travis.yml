@@ -5,7 +5,7 @@ services:
     - docker
 
 env:
-    - ProjectsDir=build/xyteam
+    - ProjectsBase=build/xyteam
       
 before_install:
     - docker pull xyteam/autobdd-run:2.1.0
