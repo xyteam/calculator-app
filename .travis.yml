@@ -13,4 +13,7 @@ before_install:
 script:
     - |
         cd .docker
-        docker-compose run --rm calculator-app-run "make test" 
+        docker-compose run --rm calculator-app-run "make js-test" 
+        docker-compose run --rm calculator-app-run "make py-test"
+        docker-compose run --rm calculator-app-run "make int-test"
+        docker-compose run --rm calculator-app-run "make e2e-test"  
